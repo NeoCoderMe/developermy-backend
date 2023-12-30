@@ -8,10 +8,13 @@ import lombok.Data;
 @Data
 @Builder
 public class GenericResponseDTO<T> {
-	
+
 	private T data;
+
 	private int statusCode;
+
 	private String statusName;
+
 	private ResponseMessage responseMessage;
 
 }

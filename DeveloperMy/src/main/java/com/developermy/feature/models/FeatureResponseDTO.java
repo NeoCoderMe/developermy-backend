@@ -1,7 +1,17 @@
 package com.developermy.feature.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.Data;
 
-public record FeatureResponseDTO(@JsonProperty("full_name") String fullName) {
-	
+//Never Use the constructors
+//Methods with small number of parameter
+//Open Close Principle,
+@Data
+@Builder
+public class FeatureResponseDTO {
+
+	private Long id;
+
+	private String fullName;
+
 }

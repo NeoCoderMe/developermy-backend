@@ -9,11 +9,11 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class ControllerExceptionMapping extends ResponseEntityExceptionHandler{
+public class ControllerExceptionMapping extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(value = {BadRequestException.class})
-	protected ResponseEntity<Object> handleDateValidationException(BadRequestException ex, WebRequest request){
-		return handleExceptionInternal(ex, "", new HttpHeaders(),  HttpStatus.BAD_REQUEST,  request);
-	} 
-	
+	@ExceptionHandler(value = { BadRequestException.class })
+	protected ResponseEntity<Object> handleDateValidationException(BadRequestException ex, WebRequest request) {
+		return handleExceptionInternal(ex, "", new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
+
 }
