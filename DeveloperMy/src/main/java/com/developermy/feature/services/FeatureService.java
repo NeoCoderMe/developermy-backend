@@ -22,26 +22,26 @@ public class FeatureService {
 	}
 
 	// elegance over performance
-	public FeatureResponseDTO getFeature(Long id) {
-		FeatureEntity featureEntity = featureProvider.getFeature(id);
+	public FeatureResponseDTO findById(Long id) {
+		FeatureEntity featureEntity = featureProvider.findById(id);
 
 		return FeatureTransformer.toFeatureResponseDTO(featureEntity);
 	}
 
-	public FeatureResponseDTO saveFeature(FeatureRequestDTO featureRequestDTO) {
+	public FeatureResponseDTO save(FeatureRequestDTO featureRequestDTO) {
 		FeatureEntity featureEntity = FeatureTransformer.toFeatureEntity(featureRequestDTO);
 
-		featureEntity = featureProvider.saveFeature(featureEntity);
+		featureEntity = featureProvider.save(featureEntity);
 
 		return FeatureTransformer.toFeatureResponseDTO(featureEntity);
 	}
 
-	public FeatureResponseDTO updateFeature(FeatureRequestDTO featureRequestDTO, Long id) {
-		FeatureEntity featureEntity = featureProvider.getFeature(id);
+	public FeatureResponseDTO update(FeatureRequestDTO featureRequestDTO, Long id) {
+		FeatureEntity featureEntity = featureProvider.findById(id);
 
-		// Updating old values
+		// Updating old values present
 		featureEntity = FeatureTransformer.update(featureEntity, featureRequestDTO);
-		featureEntity = featureProvider.saveFeature(featureEntity);
+		featureEntity = featureProvider.save(featureEntity);
 
 		return FeatureTransformer.toFeatureResponseDTO(featureEntity);
 	}

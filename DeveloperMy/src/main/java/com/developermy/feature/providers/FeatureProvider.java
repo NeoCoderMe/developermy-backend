@@ -1,9 +1,12 @@
 package com.developermy.feature.providers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.developermy.crosscutting.exceptions.BadRequestException;
 import com.developermy.feature.models.FeatureEntity;
+import com.developermy.feature.models.natives.FeatureBasicInfo;
 import com.developermy.feature.repositories.FeatureRepository;
 
 /*  Chapter 8: Boundaries
@@ -21,7 +24,7 @@ public class FeatureProvider {
 		this.featureRepository = featureRepository;
 	}
 
-	public FeatureEntity getFeature(Long id) {
+	public FeatureEntity findById(Long id) {
 		/*
 		 * Don't create a new Instance Return immediately
 		 */
@@ -29,9 +32,17 @@ public class FeatureProvider {
 
 	}
 
-	public FeatureEntity saveFeature(FeatureEntity featureEntity) { // INPUT Entity
+	public FeatureEntity save(FeatureEntity featureEntity) { // INPUT Entity
 
 		return featureRepository.save(featureEntity);
+	}
+
+	public List<FeatureEntity> findAllFeatures() {
+		return featureRepository.findAllFeatures();
+	}
+
+	public List<FeatureBasicInfo> findIdAndFullName() {
+		return featureRepository.findIdAndFullName();
 	}
 
 }

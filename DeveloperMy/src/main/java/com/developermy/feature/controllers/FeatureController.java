@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import com.developermy.feature.models.FeatureRequestDTO;
 import com.developermy.feature.models.FeatureResponseDTO;
 import com.developermy.feature.services.FeatureService;
 
+//{"full_name":"John", "password":"1234556"}
 @Validated
 @RestController
 @RequestMapping("/feature")
@@ -28,27 +30,30 @@ public class FeatureController extends BaseController {
 		this.featureService = featureService;
 	}
 
-	// All named saveFeature
-	// saveFeature over create because we use the save method also for update
+	// All named save using spring naming
+	// save over create because we use the save method also for update
 	@PostMapping("/")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<GenericResponseDTO<FeatureResponseDTO>> saveFeature(
+	public ResponseEntity<GenericResponseDTO<FeatureResponseDTO>> save(
 			@RequestBody FeatureRequestDTO featureRequestDTO) {
-		return buildOkResponse(featureService.saveFeature(featureRequestDTO));
+		return buildOkResponse(featureService.save(featureRequestDTO));
 	}
 
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<GenericResponseDTO<FeatureResponseDTO>> getFeature(@PathVariable Long id) {
-		return buildOkResponse(featureService.getFeature(id));
+	public ResponseEntity<GenericResponseDTO<FeatureResponseDTO>> findById(@PathVariable Long id) {
+		return buildOkResponse(featureService.findById(id));
 	}
 
-	// All named createFeature
-	@PostMapping("/{id}")
+	/*
+	 * PUT: Used to update a resource or create a new resource if it does not exist.
+	 * PATCH: Used to apply partial modifications to a resource.
+	 */
+	@PatchMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<GenericResponseDTO<FeatureResponseDTO>> updateFeature(
+	public ResponseEntity<GenericResponseDTO<FeatureResponseDTO>> update(
 			@RequestBody FeatureRequestDTO featureRequestDTO, @PathVariable("id") Long id) {
-		return buildOkResponse(featureService.updateFeature(featureRequestDTO, id));
+		return buildOkResponse(featureService.update(featureRequestDTO, id));
 	}
 
 }

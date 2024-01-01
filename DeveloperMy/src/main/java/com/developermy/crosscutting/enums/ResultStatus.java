@@ -8,7 +8,12 @@ package com.developermy.crosscutting.enums;
 
  */
 
-public enum ResponseMessage {
+//help me with a better name for this enum
+//public enum ResponseMessage {
+//	SUCCESS, FAILURE
+//}
+
+public enum ResultStatus {
 
 	SUCCESS, FAILURE
 
