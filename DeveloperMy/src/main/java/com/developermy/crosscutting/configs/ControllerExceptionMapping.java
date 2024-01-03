@@ -1,4 +1,4 @@
-package com.developermy.crosscutting.exceptions;
+package com.developermy.crosscutting.configs;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,6 +9,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.developermy.crosscutting.enums.ResultStatus;
+import com.developermy.crosscutting.exceptions.BadRequestException;
+import com.developermy.crosscutting.exceptions.NotFoundException;
 import com.developermy.crosscutting.models.GenericErrorMessage;
 import com.developermy.crosscutting.models.GenericResponseDTO;
 
@@ -19,6 +21,12 @@ public class ControllerExceptionMapping extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleDateValidationException(BadRequestException ex, WebRequest request) {
 		return formatException(ex, HttpStatus.BAD_REQUEST, request);
 	}
+	
+	@ExceptionHandler(value = { NotFoundException.class })
+	protected ResponseEntity<Object> handleNotFoundException(NotFoundException ex, WebRequest request) {
+		return formatException(ex, HttpStatus.NOT_FOUND, request);
+	}
+	
 
 	private ResponseEntity<Object> formatException(Exception ex, HttpStatus status, WebRequest request) {
 		GenericErrorMessage errorMessage = GenericErrorMessage.builder()

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.developermy.crosscutting.exceptions.BadRequestException;
+import com.developermy.crosscutting.exceptions.NotFoundException;
 import com.developermy.feature.models.FeatureEntity;
 import com.developermy.feature.models.natives.FeatureBasicInfo;
 import com.developermy.feature.repositories.FeatureRepository;
@@ -18,7 +18,7 @@ import com.developermy.feature.repositories.FeatureRepository;
 @Service
 public class FeatureProvider {
 
-	private FeatureRepository featureRepository;
+	private final FeatureRepository featureRepository;
 
 	public FeatureProvider(FeatureRepository featureRepository) {
 		this.featureRepository = featureRepository;
@@ -28,7 +28,7 @@ public class FeatureProvider {
 		/*
 		 * Don't create a new Instance Return immediately
 		 */
-		return featureRepository.findById(id).orElseThrow(() -> new BadRequestException("Feature Id not found " + id));
+		return featureRepository.findById(id).orElseThrow(() -> new NotFoundException("Feature Id not found " + id));
 
 	}
 

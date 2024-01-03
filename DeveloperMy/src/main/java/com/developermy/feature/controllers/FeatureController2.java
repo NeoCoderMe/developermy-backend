@@ -29,15 +29,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 //{"full_name":"Eliseo", "password":"1234556"}
-@Tag(name = "Feature1", description = "Documentation APIs Example")
+@Tag(name = "Feature2", description = "Documentation APIs Example")
 @Validated
 @RestController
-@RequestMapping("/feature")
-public class FeatureController extends BaseController {
+@RequestMapping("/feature2")
+public class FeatureController2 extends BaseController {
 
 	private final FeatureService featureService;
 
-	public FeatureController(FeatureService featureService) {
+	public FeatureController2(FeatureService featureService) {
 		this.featureService = featureService;
 	}
 

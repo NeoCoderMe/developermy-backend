@@ -3,9 +3,11 @@ package com.developermy.crosscutting.models;
 import com.developermy.crosscutting.enums.ResultStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
+@Schema(description = "Base Response Object")
 @Data
 @Builder
 public class GenericResponseDTO<T> {

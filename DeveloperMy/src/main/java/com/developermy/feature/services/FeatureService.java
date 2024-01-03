@@ -15,7 +15,7 @@ import com.developermy.feature.transformers.FeatureTransformer;
 @Service
 public class FeatureService {
 
-	private FeatureProvider featureProvider;
+	private final FeatureProvider featureProvider;
 
 	public FeatureService(FeatureProvider featureProvider) {
 		this.featureProvider = featureProvider;
