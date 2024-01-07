@@ -1,4 +1,4 @@
-package com.developermy.feature.providers;
+package com.developermy.feature.adapter;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ import com.developermy.feature.repositories.FeatureRepository;
 */
 
 @Service
-public class FeatureProvider {
+public class FeatureAdapter {
 
 	private final FeatureRepository featureRepository;
 
-	public FeatureProvider(FeatureRepository featureRepository) {
+	public FeatureAdapter(FeatureRepository featureRepository) {
 		this.featureRepository = featureRepository;
 	}
 

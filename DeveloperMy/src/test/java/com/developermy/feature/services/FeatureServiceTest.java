@@ -12,17 +12,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.developermy.feature.adapter.FeatureAdapter;
 import com.developermy.feature.models.FeatureEntity;
-import com.developermy.feature.models.FeatureRequestDTO;
-import com.developermy.feature.models.FeatureResponseDTO;
-import com.developermy.feature.providers.FeatureProvider;
+import com.developermy.feature.models.FeatureRequest;
+import com.developermy.feature.models.FeatureResponse;
 
 @ExtendWith(MockitoExtension.class)
 // @SpringBootTest No needed
 class FeatureServiceTest {
 
 	@Mock
-	private FeatureProvider featureProvider;
+	private FeatureAdapter featureAdapter;
 
 	@InjectMocks
 	private FeatureService featureService;
@@ -36,52 +36,52 @@ class FeatureServiceTest {
 			.fullName("John Doe")
 			.build();
 
-		FeatureResponseDTO expectedResponse = FeatureResponseDTO.builder().id(1l).fullName("John Doe").build();
+		FeatureResponse expectedResponse = FeatureResponse.builder().id(1l).fullName("John Doe").build();
 
-		when(featureProvider.findById(featureId)).thenReturn(mockFeatureEntity);
+		when(featureAdapter.findById(featureId)).thenReturn(mockFeatureEntity);
 
-		FeatureResponseDTO result = featureService.findById(featureId);
+		FeatureResponse result = featureService.findById(featureId);
 
-		verify(featureProvider, times(1)).findById(featureId);
+		verify(featureAdapter, times(1)).findById(featureId);
 		assertEquals(expectedResponse, result);
 	}
 
 	@Test
 	void save_feature_expected_ok() {
-		FeatureRequestDTO requestDTO = new FeatureRequestDTO("John Doe", "secretpassword");
+		FeatureRequest requestDTO = new FeatureRequest("John Doe", "secretpassword");
 		FeatureEntity mockFeatureEntity = FeatureEntity.builder()
 			.id(1l)
 			.password("123456")
 			.fullName("John Doe")
 			.build();
 
-		when(featureProvider.save(any(FeatureEntity.class))).thenReturn(mockFeatureEntity);
+		when(featureAdapter.save(any(FeatureEntity.class))).thenReturn(mockFeatureEntity);
 
-		FeatureResponseDTO result = featureService.save(requestDTO);
-		FeatureResponseDTO expectedResponse = FeatureResponseDTO.builder().id(1l).fullName("John Doe").build();
+		FeatureResponse result = featureService.save(requestDTO);
+		FeatureResponse expectedResponse = FeatureResponse.builder().id(1l).fullName("John Doe").build();
 
-		verify(featureProvider, times(1)).save(any(FeatureEntity.class));
+		verify(featureAdapter, times(1)).save(any(FeatureEntity.class));
 		assertEquals(expectedResponse, result);
 	}
 
 	@Test
 	void updateFeature_expected_ok() {
 		Long featureId = 1L;
-		FeatureResponseDTO expectedResponse = FeatureResponseDTO.builder().id(1l).fullName("John Doe").build();
-		FeatureRequestDTO requestDTO = new FeatureRequestDTO("John Doe", "secretpassword");
+		FeatureResponse expectedResponse = FeatureResponse.builder().id(1l).fullName("John Doe").build();
+		FeatureRequest requestDTO = new FeatureRequest("John Doe", "secretpassword");
 		FeatureEntity mockFeatureEntity = FeatureEntity.builder()
 			.id(1l)
 			.password("123456")
 			.fullName("John Doe")
 			.build();
 
-		when(featureProvider.findById(featureId)).thenReturn(mockFeatureEntity);
-		when(featureProvider.save(any(FeatureEntity.class))).thenReturn(mockFeatureEntity);
+		when(featureAdapter.findById(featureId)).thenReturn(mockFeatureEntity);
+		when(featureAdapter.save(any(FeatureEntity.class))).thenReturn(mockFeatureEntity);
 
-		FeatureResponseDTO result = featureService.update(requestDTO, featureId);
+		FeatureResponse result = featureService.update(requestDTO, featureId);
 
-		verify(featureProvider, times(1)).findById(featureId);
-		verify(featureProvider, times(1)).save(any(FeatureEntity.class));
+		verify(featureAdapter, times(1)).findById(featureId);
+		verify(featureAdapter, times(1)).save(any(FeatureEntity.class));
 		assertEquals(expectedResponse, result);
 	}
 

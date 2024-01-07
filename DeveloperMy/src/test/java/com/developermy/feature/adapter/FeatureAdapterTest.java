@@ -1,4 +1,4 @@
-package com.developermy.feature.providers;
+package com.developermy.feature.adapter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -20,9 +20,9 @@ import com.developermy.feature.repositories.FeatureRepository;
 import com.developermy.feature.utils.FeatureUtilTest;
 
 @ExtendWith(MockitoExtension.class)
-class FeatureProviderTest {
+class FeatureAdapterTest {
 
-	private FeatureProvider featureProvider;
+	private FeatureAdapter featureAdapter;
 
 	@Mock
 	private FeatureRepository featureRepository;
@@ -30,14 +30,14 @@ class FeatureProviderTest {
 	@BeforeEach
 	void setUp() {
 		Mockito.reset(featureRepository);
-		featureProvider = new FeatureProvider(featureRepository);
+		featureAdapter = new FeatureAdapter(featureRepository);
 	}
 
 	@Test
     void test_find_all_features_expected_ok() {
 		when(featureRepository.findAllFeatures()).thenReturn(FeatureUtilTest.getFeatureEntityList());
 		
-        List<FeatureEntity> features = featureProvider.findAllFeatures();
+        List<FeatureEntity> features = featureAdapter.findAllFeatures();
 
         assertNotNull(features);
         assertEquals(2, features.size());
@@ -47,7 +47,7 @@ class FeatureProviderTest {
     void test_find_id_and_full_name_expected_ok() {
 		when(featureRepository.findIdAndFullName()).thenReturn(FeatureUtilTest.getFeatureBasicInfo());
 		
-        List<FeatureBasicInfo> results = featureProvider.findIdAndFullName();
+        List<FeatureBasicInfo> results = featureAdapter.findIdAndFullName();
 
         assertNotNull(results);
         assertEquals(2, results.size());
@@ -65,7 +65,7 @@ class FeatureProviderTest {
 		Optional<FeatureEntity> feature = Optional.of(FeatureUtilTest.getFeatureEntity1());
 		when(featureRepository.findById(1l)).thenReturn(feature);
 
-		FeatureEntity features = featureProvider.findById(1l); // Don't returning optional
+		FeatureEntity features = featureAdapter.findById(1l); // Don't returning optional
 																// because this throws an
 																// exception
 

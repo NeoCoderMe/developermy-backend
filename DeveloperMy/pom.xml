@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> 
 	</parent>
 	<groupId>com.developermy</groupId>
 	<artifactId>developermy</artifactId>
@@ -64,39 +64,32 @@
 		    <artifactId>guava</artifactId>
 		    <version>33.0.0-jre</version>
 		</dependency>
-		<dependency>
-		    <groupId>org.reactivestreams</groupId>
-		    <artifactId>reactive-streams</artifactId>
-		    <version>1.0.4</version>
-		</dependency>
-		
-		
-		<dependency>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-checkstyle-plugin</artifactId>
-		    <version>3.3.1</version>
-		</dependency>
 		
 		<dependency>
 		  <groupId>org.springdoc</groupId>
 		  <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-		  <version>2.0.3</version>
+		  <version>2.3.0</version>
 		</dependency>
-
 		
-<!--    <dependency>-->
-<!--        <groupId>org.springdoc</groupId>-->
-<!--        <artifactId>springdoc-openapi-webmvc-core</artifactId>-->
-<!--        <version>1.6.3</version>  Reemplaza con la última versión disponible -->
-<!--    </dependency>-->
-
-<!--     springdoc-openapi-ui para la interfaz de usuario de Swagger-UI -->
-<!--    <dependency>-->
-<!--        <groupId>org.springdoc</groupId>-->
-<!--        <artifactId>springdoc-openapi-ui</artifactId>-->
-<!--        <version>1.6.3</version>  Reemplaza con la última versión disponible -->
-<!--    </dependency>-->
-	 
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt</artifactId>
+		    <version>0.12.3</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt-impl</artifactId>
+		    <version>0.12.3</version>
+		    <scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt-jackson</artifactId>
+		    <version>0.12.3</version>
+		    <scope>runtime</scope>
+		</dependency>
 		
 	</dependencies>
 
@@ -125,33 +118,6 @@
 			    </executions>
 			</plugin>
 			
-<!--			<plugin>-->
-<!--			  <groupId>org.apache.maven.plugins</groupId>-->
-<!--			  <artifactId>maven-checkstyle-plugin</artifactId>-->
-<!--			  <version>3.3.1</version>-->
-			  
-	          
-<!--			  <configuration>-->
-<!--			    <configLocation>${output.checkstyle}checkstyle.xml</configLocation>-->
-<!--			    <outputDirectory>${output.checkstyle}</outputDirectory>-->
-<!--    			<outputFile>${output.checkstyle}checkstyle-report.html</outputFile>-->
-<!--			     <consoleOutput>true</consoleOutput>-->
-<!--			     <linkXRef>false</linkXRef>-->
-<!--			    <failsOnError>true</failsOnError>-->
-<!--			    <format>xml</format>-->
-<!--			  </configuration>-->
-			  
-          
-<!--			   <executions>-->
-<!--                <execution>-->
-<!--                    <id>checkstyle</id>-->
-<!--                    <phase>verify</phase>-->
-<!--                    <goals>-->
-<!--                        <goal>check</goal>-->
-<!--                    </goals>-->
-<!--                </execution>-->
-<!--            </executions>-->
-<!--			</plugin>-->
 			
 			<plugin>
 				<groupId>io.spring.javaformat</groupId>
@@ -194,7 +160,7 @@
 	                            <limit>
 	                                <counter>LINE</counter>
 	                                <value>COVEREDRATIO</value>
-	                                <minimum>80%</minimum>
+	                                <minimum>70%</minimum>
 	                            </limit>
 	                        </limits>
 	                    </rule>

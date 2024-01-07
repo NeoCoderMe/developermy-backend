@@ -4,38 +4,37 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.developermy.crosscutting.enums.ResultStatus;
-import com.developermy.crosscutting.models.GenericResponseDTO;
+import com.developermy.crosscutting.models.GenericResponse;
 
 public abstract class BaseController {
 
-	protected <T> ResponseEntity<GenericResponseDTO<T>> buildBadRequest(T data) {
+	protected <T> ResponseEntity<GenericResponse<T>> buildBadRequest(T data) {
 		return buildResponse(HttpStatus.BAD_REQUEST, data, ResultStatus.FAILURE);
 	}
 
-	protected <T> ResponseEntity<GenericResponseDTO<T>> forBiddenRequest(T data) {
+	protected <T> ResponseEntity<GenericResponse<T>> forBiddenRequest(T data) {
 		return buildResponse(HttpStatus.FORBIDDEN, data, ResultStatus.FAILURE);
 	}
 
-	protected ResponseEntity<GenericResponseDTO<Void>> buildNoContentResponse() {
+	protected ResponseEntity<GenericResponse<Void>> buildNoContentResponse() {
 		return buildResponse(HttpStatus.NO_CONTENT, null, ResultStatus.SUCCESS);
 	}
 
-	protected ResponseEntity<GenericResponseDTO<Void>> buildTooManyRequest() {
+	protected ResponseEntity<GenericResponse<Void>> buildTooManyRequest() {
 		return buildResponse(HttpStatus.TOO_MANY_REQUESTS, null, ResultStatus.FAILURE);
 	}
 
-	protected <T> ResponseEntity<GenericResponseDTO<T>> buildTooManyRequest(T data) {
+	protected <T> ResponseEntity<GenericResponse<T>> buildTooManyRequest(T data) {
 		return buildResponse(HttpStatus.TOO_MANY_REQUESTS, data, ResultStatus.FAILURE);
 	}
 
-	protected <T> ResponseEntity<GenericResponseDTO<T>> buildOkResponse(T data) {
+	protected <T> ResponseEntity<GenericResponse<T>> buildOkResponse(T data) {
 		return buildResponse(HttpStatus.OK, data, ResultStatus.SUCCESS);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private <T> ResponseEntity<GenericResponseDTO<T>> buildResponse(HttpStatus status, T data,
-			ResultStatus resultStatus) {
-		GenericResponseDTO genericResponse = GenericResponseDTO.builder()
+	private <T> ResponseEntity<GenericResponse<T>> buildResponse(HttpStatus status, T data, ResultStatus resultStatus) {
+		GenericResponse genericResponse = GenericResponse.builder()
 			.statusCode(status.value())
 			.statusName(status.name())
 			.resultStatus(resultStatus)

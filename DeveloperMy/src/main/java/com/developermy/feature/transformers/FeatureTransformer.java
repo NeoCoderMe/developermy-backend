@@ -1,8 +1,8 @@
 package com.developermy.feature.transformers;
 
 import com.developermy.feature.models.FeatureEntity;
-import com.developermy.feature.models.FeatureRequestDTO;
-import com.developermy.feature.models.FeatureResponseDTO;
+import com.developermy.feature.models.FeatureRequest;
+import com.developermy.feature.models.FeatureResponse;
 
 /*
  Hide Utility Class Constructor:
@@ -20,7 +20,7 @@ public final class FeatureTransformer {
 	}
 
 	// FeatureRequestDTO -> FeatureEntity
-	public static FeatureEntity toFeatureEntity(FeatureRequestDTO featureRequestDTO) {
+	public static FeatureEntity toFeatureEntity(FeatureRequest featureRequestDTO) {
 		return FeatureEntity.builder()
 			.password(featureRequestDTO.password())
 			.fullName(featureRequestDTO.fullName())
@@ -29,15 +29,15 @@ public final class FeatureTransformer {
 
 	// FeatureResponseDTO -> FeatureEntity
 	// Don't transform to DTO
-	public static FeatureResponseDTO toFeatureResponseDTO(FeatureEntity featureEntity) {
+	public static FeatureResponse toFeatureResponseDTO(FeatureEntity featureEntity) {
 
-		return FeatureResponseDTO.builder().id(featureEntity.getId()).fullName(featureEntity.getFullName()).build();
+		return FeatureResponse.builder().id(featureEntity.getId()).fullName(featureEntity.getFullName()).build();
 	}
 
 	// Implement Required Business Rules
 	// Update Table multiple Screen require additional Validations
 	// (Entity , DTO)
-	public static FeatureEntity update(FeatureEntity featureEntity, FeatureRequestDTO featureRequestDTO) {
+	public static FeatureEntity update(FeatureEntity featureEntity, FeatureRequest featureRequestDTO) {
 		// Create ValidationUtil is best practice according to how?
 
 		if (featureRequestDTO.fullName() != null && !featureRequestDTO.fullName().isBlank()) {

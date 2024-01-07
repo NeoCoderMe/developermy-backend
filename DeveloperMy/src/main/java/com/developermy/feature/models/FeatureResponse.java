@@ -11,7 +11,7 @@ import lombok.Data;
 //This is not a Record
 @Data
 @Builder
-public class FeatureResponseDTO {
+public class FeatureResponse {
 
 	private Long id;
 

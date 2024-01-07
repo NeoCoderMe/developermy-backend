@@ -10,7 +10,7 @@ import lombok.Data;
 @Schema(description = "Base Response Object")
 @Data
 @Builder
-public class GenericResponseDTO<T> {
+public class GenericResponse<T> {
 
 	private T data;
 

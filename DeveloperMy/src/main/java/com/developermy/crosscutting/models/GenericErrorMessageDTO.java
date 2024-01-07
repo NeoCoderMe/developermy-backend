@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GenericErrorMessage {
+public class GenericErrorMessageDTO {
 
 	@JsonProperty("localized_message")
 	private String localizedMessage;

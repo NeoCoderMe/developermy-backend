@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.developermy.crosscutting.controllers.BaseController;
-import com.developermy.crosscutting.models.GenericErrorMessage;
-import com.developermy.crosscutting.models.GenericResponseDTO;
-import com.developermy.feature.models.FeatureRequestDTO;
-import com.developermy.feature.models.FeatureResponseDTO;
+import com.developermy.crosscutting.models.GenericErrorMessageDTO;
+import com.developermy.crosscutting.models.GenericResponse;
+import com.developermy.feature.models.FeatureRequest;
+import com.developermy.feature.models.FeatureResponse;
 import com.developermy.feature.services.FeatureService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,6 +29,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 //{"full_name":"Eliseo", "password":"1234556"}
+//http://localhost:8080/developerme/feature/1
 @Tag(name = "Feature1", description = "Documentation APIs Example")
 @Validated
 @RestController
@@ -41,49 +42,38 @@ public class FeatureController extends BaseController {
 		this.featureService = featureService;
 	}
 
-		 
 	@PostMapping("/")
 	@ResponseStatus(HttpStatus.CREATED)
-	@Operation(
-		    summary = "Create a new feature",
-		    description = "Saves a feature given its details and returns the created feature information."
-//		    ,tags = { "Create" }
-		)
-		@ApiResponses({
-		    @ApiResponse(responseCode = "201", description = "Feature created successfully",
-		                content = { @Content(schema = @Schema(implementation = FeatureResponseDTO.class), mediaType = "application/json") }),
-		    @ApiResponse(responseCode = "400", description = "Invalid request data" , content = { @Content(schema = @Schema(implementation = GenericErrorMessage.class)) }),
-		    @ApiResponse(responseCode = "500", description = "Internal server error" , content = { @Content(schema = @Schema(implementation = GenericErrorMessage.class)) })
-		})
+	@Operation(summary = "Create a new feature",
+			description = "Saves a feature given its details and returns the created feature information.")
+	@ApiResponses({
+			@ApiResponse(responseCode = "201", description = "Feature created successfully",
+					content = { @Content(schema = @Schema(implementation = FeatureResponse.class),
+							mediaType = "application/json") }),
+			@ApiResponse(responseCode = "400", description = "Invalid request data",
+					content = { @Content(schema = @Schema(implementation = GenericErrorMessageDTO.class)) }),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = { @Content(schema = @Schema(implementation = GenericErrorMessageDTO.class)) }) })
 
-	public ResponseEntity<GenericResponseDTO<FeatureResponseDTO>> save(
-			@RequestBody @Parameter(description = "Feature details for creation")
-			FeatureRequestDTO featureRequestDTO) {
+	public ResponseEntity<GenericResponse<FeatureResponse>> save(
+			@RequestBody @Parameter(description = "Feature details for creation") FeatureRequest featureRequestDTO) {
 		return buildOkResponse(featureService.save(featureRequestDTO));
 	}
 
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	@Operation(
-            summary = "Retrieve feature by ID",
-            description = "Retrieves feature details based on the provided ID."
-//            ,tags = { "Retrieve" }
-    )
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Feature retrieved successfully",
-                    content = { @Content(schema = @Schema(implementation = FeatureResponseDTO.class), mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", description = "Feature not found" , content = { @Content(schema = @Schema(implementation = GenericErrorMessage.class)) }),
-            @ApiResponse(responseCode = "500", description = "Internal server error" , content = { @Content(schema = @Schema(implementation = GenericErrorMessage.class)) })
-    })
-	public ResponseEntity<GenericResponseDTO<FeatureResponseDTO>> findById(
-			@Parameter(
-                    name = "id",
-                    description = "ID of the feature to be retrieved",
-                    in = ParameterIn.PATH,
-                    required = true,
-                    example = "1"
-            )
-			@PathVariable Long id) {
+	@Operation(summary = "Retrieve feature by ID", description = "Retrieves feature details based on the provided ID.")
+	@ApiResponses({
+			@ApiResponse(responseCode = "200", description = "Feature retrieved successfully",
+					content = { @Content(schema = @Schema(implementation = FeatureResponse.class),
+							mediaType = "application/json") }),
+			@ApiResponse(responseCode = "404", description = "Feature not found",
+					content = { @Content(schema = @Schema(implementation = GenericErrorMessageDTO.class)) }),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = { @Content(schema = @Schema(implementation = GenericErrorMessageDTO.class)) }) })
+	public ResponseEntity<GenericResponse<FeatureResponse>> findById(
+			@Parameter(name = "id", description = "ID of the feature to be retrieved", in = ParameterIn.PATH,
+					required = true, example = "1") @PathVariable Long id) {
 		return buildOkResponse(featureService.findById(id));
 	}
 
@@ -93,20 +83,20 @@ public class FeatureController extends BaseController {
 	 */
 	@PatchMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	 @Operation(
-	            summary = "Update feature by ID",
-	            description = "Updates feature details based on the provided ID and request body."
-//	            ,tags = {  "Update" }
-	    )
-	    @ApiResponses({
-	            @ApiResponse(responseCode = "200", description = "Feature updated successfully",
-	                    content = { @Content(schema = @Schema(implementation = FeatureResponseDTO.class), mediaType = "application/json") }),
-	            @ApiResponse(responseCode = "400", description = "Invalid request data" , content = { @Content(schema = @Schema(implementation = GenericErrorMessage.class)) }),
-	            @ApiResponse(responseCode = "404", description = "Feature not found" , content = { @Content(schema = @Schema(implementation = GenericErrorMessage.class)) }),
-	            @ApiResponse(responseCode = "500", description = "Internal server error" , content = { @Content(schema = @Schema(implementation = GenericErrorMessage.class)) })
-	    })
-	public ResponseEntity<GenericResponseDTO<FeatureResponseDTO>> update(
-			@RequestBody @Parameter(description = "Updated feature details") FeatureRequestDTO featureRequestDTO, 
+	@Operation(summary = "Update feature by ID",
+			description = "Updates feature details based on the provided ID and request body.")
+	@ApiResponses({
+			@ApiResponse(responseCode = "200", description = "Feature updated successfully",
+					content = { @Content(schema = @Schema(implementation = FeatureResponse.class),
+							mediaType = "application/json") }),
+			@ApiResponse(responseCode = "400", description = "Invalid request data",
+					content = { @Content(schema = @Schema(implementation = GenericErrorMessageDTO.class)) }),
+			@ApiResponse(responseCode = "404", description = "Feature not found",
+					content = { @Content(schema = @Schema(implementation = GenericErrorMessageDTO.class)) }),
+			@ApiResponse(responseCode = "500", description = "Internal server error",
+					content = { @Content(schema = @Schema(implementation = GenericErrorMessageDTO.class)) }) })
+	public ResponseEntity<GenericResponse<FeatureResponse>> update(
+			@RequestBody @Parameter(description = "Updated feature details") FeatureRequest featureRequestDTO,
 			@Parameter(description = "ID of the feature to update") @PathVariable("id") Long id) {
 		return buildOkResponse(featureService.update(featureRequestDTO, id));
 	}

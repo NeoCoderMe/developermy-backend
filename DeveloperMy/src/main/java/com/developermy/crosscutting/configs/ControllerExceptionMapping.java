@@ -11,8 +11,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.developermy.crosscutting.enums.ResultStatus;
 import com.developermy.crosscutting.exceptions.BadRequestException;
 import com.developermy.crosscutting.exceptions.NotFoundException;
-import com.developermy.crosscutting.models.GenericErrorMessage;
-import com.developermy.crosscutting.models.GenericResponseDTO;
+import com.developermy.crosscutting.models.GenericErrorMessageDTO;
+import com.developermy.crosscutting.models.GenericResponse;
+
+import io.jsonwebtoken.JwtException;
 
 @ControllerAdvice
 public class ControllerExceptionMapping extends ResponseEntityExceptionHandler {
@@ -21,20 +23,24 @@ public class ControllerExceptionMapping extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleDateValidationException(BadRequestException ex, WebRequest request) {
 		return formatException(ex, HttpStatus.BAD_REQUEST, request);
 	}
-	
+
 	@ExceptionHandler(value = { NotFoundException.class })
 	protected ResponseEntity<Object> handleNotFoundException(NotFoundException ex, WebRequest request) {
 		return formatException(ex, HttpStatus.NOT_FOUND, request);
 	}
-	
+
+	@ExceptionHandler(value = { JwtException.class })
+	protected ResponseEntity<Object> handleJwtException(JwtException ex, WebRequest request) {
+		return formatException(ex, HttpStatus.BAD_REQUEST, request);
+	}
 
 	private ResponseEntity<Object> formatException(Exception ex, HttpStatus status, WebRequest request) {
-		GenericErrorMessage errorMessage = GenericErrorMessage.builder()
+		GenericErrorMessageDTO errorMessage = GenericErrorMessageDTO.builder()
 			.localizedMessage(ex.getLocalizedMessage())
 			.cause(String.valueOf(ex.getCause()))
 			.message(ex.getMessage())
 			.build();
-		GenericResponseDTO<Object> genericResponseDTO = GenericResponseDTO.builder()
+		GenericResponse<Object> genericResponseDTO = GenericResponse.builder()
 			.statusCode(status.value())
 			.statusName(status.name())
 			.resultStatus(ResultStatus.FAILURE)

@@ -2,10 +2,10 @@ package com.developermy.feature.services;
 
 import org.springframework.stereotype.Service;
 
+import com.developermy.feature.adapter.FeatureAdapter;
 import com.developermy.feature.models.FeatureEntity;
-import com.developermy.feature.models.FeatureRequestDTO;
-import com.developermy.feature.models.FeatureResponseDTO;
-import com.developermy.feature.providers.FeatureProvider;
+import com.developermy.feature.models.FeatureRequest;
+import com.developermy.feature.models.FeatureResponse;
 import com.developermy.feature.transformers.FeatureTransformer;
 
 /*
@@ -15,33 +15,33 @@ import com.developermy.feature.transformers.FeatureTransformer;
 @Service
 public class FeatureService {
 
-	private final FeatureProvider featureProvider;
+	private final FeatureAdapter featureAdapter;
 
-	public FeatureService(FeatureProvider featureProvider) {
-		this.featureProvider = featureProvider;
+	public FeatureService(FeatureAdapter featureProvider) {
+		this.featureAdapter = featureProvider;
 	}
 
 	// elegance over performance
-	public FeatureResponseDTO findById(Long id) {
-		FeatureEntity featureEntity = featureProvider.findById(id);
+	public FeatureResponse findById(Long id) {
+		FeatureEntity featureEntity = featureAdapter.findById(id);
 
 		return FeatureTransformer.toFeatureResponseDTO(featureEntity);
 	}
 
-	public FeatureResponseDTO save(FeatureRequestDTO featureRequestDTO) {
+	public FeatureResponse save(FeatureRequest featureRequestDTO) {
 		FeatureEntity featureEntity = FeatureTransformer.toFeatureEntity(featureRequestDTO);
 
-		featureEntity = featureProvider.save(featureEntity);
+		featureEntity = featureAdapter.save(featureEntity);
 
 		return FeatureTransformer.toFeatureResponseDTO(featureEntity);
 	}
 
-	public FeatureResponseDTO update(FeatureRequestDTO featureRequestDTO, Long id) {
-		FeatureEntity featureEntity = featureProvider.findById(id);
+	public FeatureResponse update(FeatureRequest featureRequestDTO, Long id) {
+		FeatureEntity featureEntity = featureAdapter.findById(id);
 
 		// Updating old values present
 		featureEntity = FeatureTransformer.update(featureEntity, featureRequestDTO);
-		featureEntity = featureProvider.save(featureEntity);
+		featureEntity = featureAdapter.save(featureEntity);
 
 		return FeatureTransformer.toFeatureResponseDTO(featureEntity);
 	}
