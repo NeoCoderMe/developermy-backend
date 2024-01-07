@@ -11,6 +11,10 @@ public final class UserDTOSupplier {
 			.id(1l)
 			.authorities(AuthoritiesDTOSupplier.getAuthorityDTOAdminSet())
 			.email("email1@hotmail.com")
+			.fullName("user 1")
+			.enabled(true)
+			.password("1234")
+			.urlPicture("google.com")
 			.build();
 	}
 
@@ -19,6 +23,10 @@ public final class UserDTOSupplier {
 			.id(1l)
 			.authorities(AuthoritiesDTOSupplier.getAuthorityDTOAdminSet())
 			.email("email2@hotmail.com")
+			.fullName("user 2")
+			.enabled(true)
+			.password("1234")
+			.urlPicture("google.com")
 			.build();
 	}
 

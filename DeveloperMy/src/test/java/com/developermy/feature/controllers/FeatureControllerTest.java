@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  can run in a parallel way
  */
 
-@WebMvcTest
+@WebMvcTest( controllers = FeatureController.class)
 class FeatureControllerTest {
 
 	@Autowired

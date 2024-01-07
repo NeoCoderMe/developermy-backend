@@ -17,8 +17,8 @@ public class FeatureService {
 
 	private final FeatureAdapter featureAdapter;
 
-	public FeatureService(FeatureAdapter featureProvider) {
-		this.featureAdapter = featureProvider;
+	public FeatureService(FeatureAdapter featureAdapter) {
+		this.featureAdapter = featureAdapter;
 	}
 
 	// elegance over performance

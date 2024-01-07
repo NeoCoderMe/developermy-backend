@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.developermy.crosscutting.controllers.BaseController;
 import com.developermy.crosscutting.models.GenericResponse;
-import com.developermy.security.jwt.models.SecurityTokenDTO;
 import com.developermy.security.jwt.models.JwtVerificationResponse;
+import com.developermy.security.jwt.models.SecurityTokenDTO;
 import com.developermy.security.jwt.models.UserAuthenticationRequest;
-import com.developermy.security.jwt.services.JWTService;
+import com.developermy.security.jwt.services.JwtService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -24,11 +24,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/jwt")
 public class JWTController extends BaseController {
 
-	private JWTService jwtService;
+	private final JwtService jwtService;
 
-	public JWTController(JWTService jwtService) {
-		this.jwtService = jwtService;
-	}
+    public JWTController(JwtService jwtService) {
+        this.jwtService = jwtService;
+    }
 
 	@PostMapping("/generate")
 	@ResponseStatus(HttpStatus.OK)
