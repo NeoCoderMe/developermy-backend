@@ -15,6 +15,7 @@ import com.developermy.feature.repositories.FeatureRepository;
 	Database direct operations
 */
 
+// S3Bucket  ExchanmgeORder   Bitso  Binance   BitsoOrder   BinanceORder
 @Service
 public class FeatureAdapter {
 

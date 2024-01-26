@@ -31,7 +31,7 @@ public class ControllerExceptionMapping extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(value = { JwtException.class })
 	protected ResponseEntity<Object> handleJwtException(JwtException ex, WebRequest request) {
-		return formatException(ex, HttpStatus.BAD_REQUEST, request);
+		return formatException(ex, HttpStatus.UNAUTHORIZED, request);
 	}
 
 	private ResponseEntity<Object> formatException(Exception ex, HttpStatus status, WebRequest request) {
