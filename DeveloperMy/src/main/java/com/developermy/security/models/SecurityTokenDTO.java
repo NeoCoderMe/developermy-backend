@@ -1,4 +1,4 @@
-package com.developermy.security.jwt.models;
+package com.developermy.security.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,5 +12,7 @@ import lombok.NoArgsConstructor;
 public class SecurityTokenDTO {
 
 	private String jwt;
+
+	private String userName;
 
 }

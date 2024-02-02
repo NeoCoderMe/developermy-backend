@@ -1,0 +1,10 @@
+INSERT INTO users (user_name, email, password) VALUES ('john_doe', 'john.doe@email.com', 'password123');
+INSERT INTO users (user_name, email, password) VALUES ('alice_smith', 'alice.smith@email.com', 'securepass');
+INSERT INTO users (user_name, email, password) VALUES ('bob_jones', 'bob.jones@email.com', 'bobspassword');
+INSERT INTO users (user_name, email, password) VALUES ('emma_watson', 'emma.watson@email.com', 'emmasecret');
+INSERT INTO users (user_name, email, password) VALUES ('charlie_brown', 'charlie.brown@email.com', 'peanuts123');
+INSERT INTO users (user_name, email, password) VALUES ('lucy_miller', 'lucy.miller@email.com', 'lucy1234');
+INSERT INTO users (user_name, email, password) VALUES ('david_jackson', 'david.jackson@email.com', 'davidpass');
+INSERT INTO users (user_name, email, password) VALUES ('susan_smith', 'susan.smith@email.com', 'susanspass');
+INSERT INTO users (user_name, email, password) VALUES ('michael_jordan', 'michael.jordan@email.com', 'jumpman23');
+INSERT INTO users (user_name, email, password) VALUES ('olivia_white', 'olivia.white@email.com', 'oliviapwd');

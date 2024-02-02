@@ -4,18 +4,20 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.developermy.crosscutting.exceptions.NotFoundException;
 import com.developermy.feature.models.FeatureEntity;
 import com.developermy.feature.models.natives.FeatureBasicInfo;
 import com.developermy.feature.repositories.FeatureRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 /*  Chapter 8: Boundaries
 
 	Dependency Inversion Principle
 	Database direct operations
+	
+	Transformation
 */
-
-// S3Bucket  ExchanmgeORder   Bitso  Binance   BitsoOrder   BinanceORder
+ 
 @Service
 public class FeatureAdapter {
 
@@ -29,7 +31,7 @@ public class FeatureAdapter {
 		/*
 		 * Don't create a new Instance Return immediately
 		 */
-		return featureRepository.findById(id).orElseThrow(() -> new NotFoundException("Feature Id not found " + id));
+		return featureRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Feature Id not found " + id));
 
 	}
 

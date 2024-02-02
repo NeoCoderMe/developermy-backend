@@ -14,6 +14,6 @@ public interface FeatureRepository extends JpaRepository<FeatureEntity, Long> {
 	List<FeatureEntity> findAllFeatures();
 
 	@Query(value = "SELECT id, full_name FROM feature where id > 0", nativeQuery = true)
-	List<FeatureBasicInfo> findIdAndFullName(); // List<Object[]> findIdAndFullName();
+	List<FeatureBasicInfo> findIdAndFullName();
 
 }

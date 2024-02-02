@@ -3,6 +3,8 @@ package com.developermy.crosscutting.models;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.developermy.security.enums.AuthorityEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO implements Serializable {
+public class UserSsoDTO implements Serializable {
 
 	private static final long serialVersionUID = 5321372543651919567L;
 
@@ -30,6 +32,6 @@ public class UserDTO implements Serializable {
 
 	private String email;
 
-	private Set<AuthoritiesDTO> authorities;
+	private Set<AuthorityEnum> authorities;
 
 }

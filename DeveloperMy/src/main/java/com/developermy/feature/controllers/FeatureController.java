@@ -28,8 +28,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-//{"full_name":"Eliseo", "password":"1234556"}
-//http://localhost:8080/developerme/feature/1
+
 @Tag(name = "Feature1", description = "Documentation APIs Example")
 @Validated
 @RestController
@@ -56,8 +55,8 @@ public class FeatureController extends BaseController {
 					content = { @Content(schema = @Schema(implementation = GenericErrorMessageDTO.class)) }) })
 
 	public ResponseEntity<GenericResponse<FeatureResponse>> save(
-			@RequestBody @Parameter(description = "Feature details for creation") FeatureRequest featureRequestDTO) {
-		return buildOkResponse(featureService.save(featureRequestDTO));
+			@RequestBody @Parameter(description = "Feature details for creation") FeatureRequest featureRequest) {
+		return buildOkResponse(featureService.save(featureRequest));
 	}
 
 	@GetMapping("/{id}")

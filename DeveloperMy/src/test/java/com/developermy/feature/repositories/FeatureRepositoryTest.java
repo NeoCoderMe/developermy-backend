@@ -20,7 +20,7 @@ class FeatureRepositoryTest {
 	private FeatureRepository featureRepository;
 
 	@Test
-	@Sql("/db/feature.sql")
+	@Sql("/db/features.sql")
 	void test_find_all_features_expected_ok() {
 
 		List<FeatureEntity> features = featureRepository.findAllFeatures();
@@ -30,7 +30,7 @@ class FeatureRepositoryTest {
 	}
 
 	@Test
-	@Sql("/db/feature.sql")
+	@Sql("/db/features.sql")
 	public void test_find_id_and_full_name_expected_ok() {
 		List<FeatureBasicInfo> results = featureRepository.findIdAndFullName();
 

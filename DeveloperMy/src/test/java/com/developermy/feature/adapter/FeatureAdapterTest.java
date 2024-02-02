@@ -17,7 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.developermy.feature.models.FeatureEntity;
 import com.developermy.feature.models.natives.FeatureBasicInfo;
 import com.developermy.feature.repositories.FeatureRepository;
-import com.developermy.feature.utils.FeatureUtilTest;
+import com.developermy.feature.suppliers.FeatureEntitySupplier;
 
 @ExtendWith(MockitoExtension.class)
 class FeatureAdapterTest {
@@ -35,7 +35,7 @@ class FeatureAdapterTest {
 
 	@Test
     void test_find_all_features_expected_ok() {
-		when(featureRepository.findAllFeatures()).thenReturn(FeatureUtilTest.getFeatureEntityList());
+		when(featureRepository.findAllFeatures()).thenReturn(FeatureEntitySupplier.getFeatureEntityList());
 		
         List<FeatureEntity> features = featureAdapter.findAllFeatures();
 
@@ -45,7 +45,7 @@ class FeatureAdapterTest {
 
 	@Test
     void test_find_id_and_full_name_expected_ok() {
-		when(featureRepository.findIdAndFullName()).thenReturn(FeatureUtilTest.getFeatureBasicInfo());
+		when(featureRepository.findIdAndFullName()).thenReturn(FeatureEntitySupplier.getFeatureBasicInfo());
 		
         List<FeatureBasicInfo> results = featureAdapter.findIdAndFullName();
 
@@ -62,12 +62,10 @@ class FeatureAdapterTest {
 
 	@Test
 	void test_find_features_by_id_expected_ok() {
-		Optional<FeatureEntity> feature = Optional.of(FeatureUtilTest.getFeatureEntity1());
+		Optional<FeatureEntity> feature = Optional.of(FeatureEntitySupplier.getFeatureEntityAdmin());
 		when(featureRepository.findById(1l)).thenReturn(feature);
 
-		FeatureEntity features = featureAdapter.findById(1l); // Don't returning optional
-																// because this throws an
-																// exception
+		FeatureEntity features = featureAdapter.findById(1l);
 
 		assertNotNull(features);
 		assertNotNull(features.getFullName());

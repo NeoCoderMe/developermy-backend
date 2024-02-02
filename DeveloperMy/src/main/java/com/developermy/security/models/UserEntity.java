@@ -1,4 +1,4 @@
-package com.developermy.feature.models;
+package com.developermy.security.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,20 +13,21 @@ import lombok.NoArgsConstructor;
 
 @Builder
 @Data
-@Entity
-@Table(name = "features")
-@NoArgsConstructor
 @AllArgsConstructor
-public class FeatureEntity {
+@NoArgsConstructor
+@Entity
+@Table(name = "users")
+public class UserEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "full_name") // use underscore in the name
-	private String fullName;
+	@Column(name = "user_name")
+	private String userName;
 
-	@Column(name = "password")
+	private String email;
+
 	private String password;
 
 }

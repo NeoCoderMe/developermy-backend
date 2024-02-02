@@ -16,9 +16,11 @@ import com.developermy.feature.adapter.FeatureAdapter;
 import com.developermy.feature.models.FeatureEntity;
 import com.developermy.feature.models.FeatureRequest;
 import com.developermy.feature.models.FeatureResponse;
+import com.developermy.feature.suppliers.FeatureEntitySupplier;
+import com.developermy.feature.suppliers.FeatureRequestSupplier;
+import com.developermy.feature.suppliers.FeatureResponseSupplier;
 
 @ExtendWith(MockitoExtension.class)
-// @SpringBootTest No needed
 class FeatureServiceTest {
 
 	@Mock
@@ -30,13 +32,9 @@ class FeatureServiceTest {
 	@Test
 	void get_feature_expected_ok() {
 		Long featureId = 1L;
-		FeatureEntity mockFeatureEntity = FeatureEntity.builder()
-			.id(1l)
-			.password("123456")
-			.fullName("John Doe")
-			.build();
+		FeatureEntity mockFeatureEntity = FeatureEntitySupplier.getFeatureEntityAdmin();
 
-		FeatureResponse expectedResponse = FeatureResponse.builder().id(1l).fullName("John Doe").build();
+		FeatureResponse expectedResponse = FeatureResponseSupplier.getFeatureResponse();
 
 		when(featureAdapter.findById(featureId)).thenReturn(mockFeatureEntity);
 
@@ -48,17 +46,13 @@ class FeatureServiceTest {
 
 	@Test
 	void save_feature_expected_ok() {
-		FeatureRequest requestDTO = new FeatureRequest("John Doe", "secretpassword");
-		FeatureEntity mockFeatureEntity = FeatureEntity.builder()
-			.id(1l)
-			.password("123456")
-			.fullName("John Doe")
-			.build();
+		FeatureRequest requestDTO = FeatureRequestSupplier.getFeatureRequest();
+		FeatureEntity mockFeatureEntity = FeatureEntitySupplier.getFeatureEntityAdmin();
 
 		when(featureAdapter.save(any(FeatureEntity.class))).thenReturn(mockFeatureEntity);
 
 		FeatureResponse result = featureService.save(requestDTO);
-		FeatureResponse expectedResponse = FeatureResponse.builder().id(1l).fullName("John Doe").build();
+		FeatureResponse expectedResponse = FeatureResponseSupplier.getFeatureResponse();
 
 		verify(featureAdapter, times(1)).save(any(FeatureEntity.class));
 		assertEquals(expectedResponse, result);
@@ -67,13 +61,9 @@ class FeatureServiceTest {
 	@Test
 	void updateFeature_expected_ok() {
 		Long featureId = 1L;
-		FeatureResponse expectedResponse = FeatureResponse.builder().id(1l).fullName("John Doe").build();
-		FeatureRequest requestDTO = new FeatureRequest("John Doe", "secretpassword");
-		FeatureEntity mockFeatureEntity = FeatureEntity.builder()
-			.id(1l)
-			.password("123456")
-			.fullName("John Doe")
-			.build();
+		FeatureResponse expectedResponse = FeatureResponseSupplier.getFeatureResponse();
+		FeatureRequest requestDTO = FeatureRequestSupplier.getFeatureRequest();
+		FeatureEntity mockFeatureEntity = FeatureEntitySupplier.getFeatureEntityAdmin();
 
 		when(featureAdapter.findById(featureId)).thenReturn(mockFeatureEntity);
 		when(featureAdapter.save(any(FeatureEntity.class))).thenReturn(mockFeatureEntity);

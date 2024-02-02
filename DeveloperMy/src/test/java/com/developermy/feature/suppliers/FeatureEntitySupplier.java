@@ -1,4 +1,4 @@
-package com.developermy.feature.utils;
+package com.developermy.feature.suppliers;
 
 import java.util.List;
 
@@ -6,25 +6,25 @@ import com.developermy.feature.models.FeatureEntity;
 import com.developermy.feature.models.natives.FeatureBasicInfo;
 
 //Private all the method until needed
-public final class FeatureUtilTest {
+public final class FeatureEntitySupplier {
 
-	private FeatureUtilTest() {
+	private FeatureEntitySupplier() {
 
 	}
 
 	public static List<FeatureEntity> getFeatureEntityList() {
-		return List.of(getFeatureEntity1(), getFeatureEntity2());
+		return List.of(getFeatureEntityAdmin(), getFeatureEntityAsus());
 	}
 
 	public static List<FeatureBasicInfo> getFeatureBasicInfo() {
 		return List.of(getFeatureBasicInfo1(), getFeatureBasicInfo2());
 	}
 
-	public static FeatureEntity getFeatureEntity1() {
-		return FeatureEntity.builder().id(1l).fullName("John Doe").password("password123").build();
+	public static FeatureEntity getFeatureEntityAdmin() {
+		return FeatureEntity.builder().id(1l).fullName("Admin").password("password123").build();
 	}
 
-	private static FeatureEntity getFeatureEntity2() {
+	private static FeatureEntity getFeatureEntityAsus() {
 		return FeatureEntity.builder().id(2l).fullName("Asus User").password("password3").build();
 	}
 

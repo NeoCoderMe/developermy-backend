@@ -20,17 +20,16 @@ public final class FeatureTransformer {
 	}
 
 	// FeatureRequestDTO -> FeatureEntity
-	public static FeatureEntity toFeatureEntity(FeatureRequest featureRequestDTO) {
+	public static FeatureEntity toFeatureEntity(FeatureRequest featureRequest) {
 		return FeatureEntity.builder()
-			.password(featureRequestDTO.password())
-			.fullName(featureRequestDTO.fullName())
+			.password(featureRequest.password())
+			.fullName(featureRequest.fullName())
 			.build();
 	}
 
 	// FeatureResponseDTO -> FeatureEntity
 	// Don't transform to DTO
 	public static FeatureResponse toFeatureResponseDTO(FeatureEntity featureEntity) {
-
 		return FeatureResponse.builder().id(featureEntity.getId()).fullName(featureEntity.getFullName()).build();
 	}
 

@@ -10,7 +10,6 @@ import com.developermy.feature.transformers.FeatureTransformer;
 
 /*
  Business logic
- Transformations
  */
 @Service
 public class FeatureService {
@@ -28,8 +27,8 @@ public class FeatureService {
 		return FeatureTransformer.toFeatureResponseDTO(featureEntity);
 	}
 
-	public FeatureResponse save(FeatureRequest featureRequestDTO) {
-		FeatureEntity featureEntity = FeatureTransformer.toFeatureEntity(featureRequestDTO);
+	public FeatureResponse save(FeatureRequest featureRequest) {
+		FeatureEntity featureEntity = FeatureTransformer.toFeatureEntity(featureRequest);
 
 		featureEntity = featureAdapter.save(featureEntity);
 

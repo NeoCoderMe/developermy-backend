@@ -10,11 +10,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.developermy.crosscutting.enums.ResultStatus;
 import com.developermy.crosscutting.exceptions.BadRequestException;
-import com.developermy.crosscutting.exceptions.NotFoundException;
 import com.developermy.crosscutting.models.GenericErrorMessageDTO;
 import com.developermy.crosscutting.models.GenericResponse;
 
 import io.jsonwebtoken.JwtException;
+import jakarta.persistence.EntityNotFoundException;
 
 @ControllerAdvice
 public class ControllerExceptionMapping extends ResponseEntityExceptionHandler {
@@ -24,14 +24,14 @@ public class ControllerExceptionMapping extends ResponseEntityExceptionHandler {
 		return formatException(ex, HttpStatus.BAD_REQUEST, request);
 	}
 
-	@ExceptionHandler(value = { NotFoundException.class })
-	protected ResponseEntity<Object> handleNotFoundException(NotFoundException ex, WebRequest request) {
-		return formatException(ex, HttpStatus.NOT_FOUND, request);
-	}
-
 	@ExceptionHandler(value = { JwtException.class })
 	protected ResponseEntity<Object> handleJwtException(JwtException ex, WebRequest request) {
 		return formatException(ex, HttpStatus.UNAUTHORIZED, request);
+	}
+
+	@ExceptionHandler(value = { EntityNotFoundException.class })
+	protected ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request) {
+		return formatException(ex, HttpStatus.BAD_REQUEST, request);
 	}
 
 	private ResponseEntity<Object> formatException(Exception ex, HttpStatus status, WebRequest request) {

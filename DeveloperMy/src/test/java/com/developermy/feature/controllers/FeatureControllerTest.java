@@ -18,15 +18,11 @@ import com.developermy.crosscutting.exceptions.BadRequestException;
 import com.developermy.feature.models.FeatureRequest;
 import com.developermy.feature.models.FeatureResponse;
 import com.developermy.feature.services.FeatureService;
+import com.developermy.feature.suppliers.FeatureRequestSupplier;
+import com.developermy.feature.suppliers.FeatureResponseSupplier;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/*
- Mocking because
- Each test needs to be independent
- can run in a parallel way
- */
-
-@WebMvcTest( controllers = FeatureController.class)
+@WebMvcTest(controllers = FeatureController.class)
 class FeatureControllerTest {
 
 	@Autowired
@@ -45,8 +41,8 @@ class FeatureControllerTest {
 
 	@Test
 	void save_feature_expected_ok() throws Exception {
-		FeatureRequest requestDTO = new FeatureRequest("John Doe", "secretpassword");
-		FeatureResponse responseDTO = FeatureResponse.builder().id(1l).fullName("John Doe").build();
+		FeatureRequest requestDTO = FeatureRequestSupplier.getFeatureRequest();
+		FeatureResponse responseDTO = FeatureResponseSupplier.getFeatureResponse();
 
 		when(featureService.save(requestDTO)).thenReturn(responseDTO);
 
@@ -61,7 +57,7 @@ class FeatureControllerTest {
 	@Test
 	void get_feature_expected_ok() throws Exception {
 		Long featureId = 1L;
-		FeatureResponse responseDTO = FeatureResponse.builder().id(featureId).fullName("John Doe").build();
+		FeatureResponse responseDTO = FeatureResponseSupplier.getFeatureResponse();
 
 		when(featureService.findById(featureId)).thenReturn(responseDTO);
 
@@ -75,8 +71,8 @@ class FeatureControllerTest {
 	@Test
 	void update_feature_expected_ok() throws Exception {
 		Long featureId = 1L;
-		FeatureRequest requestDTO = new FeatureRequest("Updated Name", "Updated Password");
-		FeatureResponse responseDTO = FeatureResponse.builder().id(1l).fullName("Updated Name").build();
+		FeatureRequest requestDTO = FeatureRequestSupplier.getFeatureRequest();
+		FeatureResponse responseDTO = FeatureResponseSupplier.getFeatureResponse();
 
 		when(featureService.update(requestDTO, featureId)).thenReturn(responseDTO);
 

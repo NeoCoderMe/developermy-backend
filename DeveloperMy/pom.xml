@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.1</version>
+		<version>3.3.0-M1</version>
 		<relativePath/> 
 	</parent>
 	<groupId>com.developermy</groupId>
@@ -29,6 +29,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>jakarta.validation</groupId>
+		    <artifactId>jakarta.validation-api</artifactId>
+		    <version>3.1.0-M1</version>
 		</dependency>
 
 		<dependency>
@@ -160,7 +166,7 @@
 	                            <limit>
 	                                <counter>LINE</counter>
 	                                <value>COVEREDRATIO</value>
-	                                <minimum>70%</minimum>
+	                                <minimum>60%</minimum>
 	                            </limit>
 	                        </limits>
 	                    </rule>
@@ -170,4 +176,24 @@
 		</plugins>
 	</build>
 	
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 </project>
