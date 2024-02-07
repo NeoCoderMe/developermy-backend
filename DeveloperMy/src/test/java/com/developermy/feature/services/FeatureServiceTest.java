@@ -13,10 +13,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.developermy.feature.adapter.FeatureAdapter;
-import com.developermy.feature.models.FeatureEntity;
 import com.developermy.feature.models.FeatureRequest;
 import com.developermy.feature.models.FeatureResponse;
-import com.developermy.feature.suppliers.FeatureEntitySupplier;
 import com.developermy.feature.suppliers.FeatureRequestSupplier;
 import com.developermy.feature.suppliers.FeatureResponseSupplier;
 
@@ -32,11 +30,11 @@ class FeatureServiceTest {
 	@Test
 	void get_feature_expected_ok() {
 		Long featureId = 1L;
-		FeatureEntity mockFeatureEntity = FeatureEntitySupplier.getFeatureEntityAdmin();
-
+//		FeatureEntity mockFeatureEntity = FeatureEntitySupplier.getFeatureEntityAdmin();
+		FeatureResponse mockFeatureResponse = FeatureResponseSupplier.getFeatureResponse();
 		FeatureResponse expectedResponse = FeatureResponseSupplier.getFeatureResponse();
 
-		when(featureAdapter.findById(featureId)).thenReturn(mockFeatureEntity);
+		when(featureAdapter.findById(featureId)).thenReturn(mockFeatureResponse);
 
 		FeatureResponse result = featureService.findById(featureId);
 
@@ -47,14 +45,15 @@ class FeatureServiceTest {
 	@Test
 	void save_feature_expected_ok() {
 		FeatureRequest requestDTO = FeatureRequestSupplier.getFeatureRequest();
-		FeatureEntity mockFeatureEntity = FeatureEntitySupplier.getFeatureEntityAdmin();
-
-		when(featureAdapter.save(any(FeatureEntity.class))).thenReturn(mockFeatureEntity);
+//		FeatureEntity mockFeatureEntity = FeatureEntitySupplier.getFeatureEntityAdmin();
+		FeatureResponse mockFeatureResponse = FeatureResponseSupplier.getFeatureResponse();
+		
+		when(featureAdapter.save(any(FeatureRequest.class))).thenReturn(mockFeatureResponse);
 
 		FeatureResponse result = featureService.save(requestDTO);
 		FeatureResponse expectedResponse = FeatureResponseSupplier.getFeatureResponse();
 
-		verify(featureAdapter, times(1)).save(any(FeatureEntity.class));
+		verify(featureAdapter, times(1)).save(any(FeatureRequest.class));
 		assertEquals(expectedResponse, result);
 	}
 
@@ -63,15 +62,12 @@ class FeatureServiceTest {
 		Long featureId = 1L;
 		FeatureResponse expectedResponse = FeatureResponseSupplier.getFeatureResponse();
 		FeatureRequest requestDTO = FeatureRequestSupplier.getFeatureRequest();
-		FeatureEntity mockFeatureEntity = FeatureEntitySupplier.getFeatureEntityAdmin();
-
-		when(featureAdapter.findById(featureId)).thenReturn(mockFeatureEntity);
-		when(featureAdapter.save(any(FeatureEntity.class))).thenReturn(mockFeatureEntity);
+		FeatureResponse mockFeatureResponse = FeatureResponseSupplier.getFeatureResponse();
+		
+		when(featureAdapter.update(requestDTO, featureId)).thenReturn(mockFeatureResponse);
 
 		FeatureResponse result = featureService.update(requestDTO, featureId);
 
-		verify(featureAdapter, times(1)).findById(featureId);
-		verify(featureAdapter, times(1)).save(any(FeatureEntity.class));
 		assertEquals(expectedResponse, result);
 	}
 

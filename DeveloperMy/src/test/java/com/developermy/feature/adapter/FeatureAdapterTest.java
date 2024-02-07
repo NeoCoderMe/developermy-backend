@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.developermy.feature.models.FeatureEntity;
+import com.developermy.feature.models.FeatureResponse;
 import com.developermy.feature.models.natives.FeatureBasicInfo;
 import com.developermy.feature.repositories.FeatureRepository;
 import com.developermy.feature.suppliers.FeatureEntitySupplier;
@@ -65,7 +66,7 @@ class FeatureAdapterTest {
 		Optional<FeatureEntity> feature = Optional.of(FeatureEntitySupplier.getFeatureEntityAdmin());
 		when(featureRepository.findById(1l)).thenReturn(feature);
 
-		FeatureEntity features = featureAdapter.findById(1l);
+		FeatureResponse features = featureAdapter.findById(1l);
 
 		assertNotNull(features);
 		assertNotNull(features.getFullName());
