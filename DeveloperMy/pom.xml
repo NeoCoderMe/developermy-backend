@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.0-M1</version>
+		<version>3.3.4</version>
 		<relativePath/> 
 	</parent>
 	<groupId>com.developermy</groupId>
@@ -34,7 +34,6 @@
 		<dependency>
 		    <groupId>jakarta.validation</groupId>
 		    <artifactId>jakarta.validation-api</artifactId>
-		    <version>3.1.0-M1</version>
 		</dependency>
 
 		<dependency>
@@ -97,10 +96,117 @@
 		    <scope>runtime</scope>
 		</dependency>
 		
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-csv</artifactId>
+		    <version>1.11.0</version>
+		</dependency>
+		
+<!--		<dependency>-->
+<!--		    <groupId>io.qdrant</groupId>-->
+<!--		    <artifactId>client</artifactId>-->
+<!--		    <version>1.11.0</version>-->
+<!--		</dependency>-->
+		
+		<dependency>
+		    <groupId>io.qdrant</groupId>
+		    <artifactId>client</artifactId>
+		    <version>1.14.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.grpc</groupId>
+		    <artifactId>grpc-protobuf</artifactId>
+		    <version>1.65.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.grpc</groupId>
+		    <artifactId>grpc-stub</artifactId>
+		    <version>1.65.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.grpc</groupId>
+		    <artifactId>grpc-netty</artifactId>
+		    <version>1.65.1</version>
+		</dependency>
+		
+		
+		
+		
+		<dependency>
+		    <groupId>ai.djl</groupId>
+		    <artifactId>api</artifactId>
+		    <version>0.29.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>ai.djl.pytorch</groupId>
+		    <artifactId>pytorch-engine</artifactId>
+		    <version>0.29.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>ai.djl.huggingface</groupId>
+		    <artifactId>tokenizers</artifactId>
+		    <version>0.29.0</version>
+		</dependency>
+		
+	    
 	</dependencies>
-
+	
+	
+	<dependencyManagement>
+	  <dependencies>
+	    <dependency>
+	      <groupId>com.google.protobuf</groupId>
+	      <artifactId>protobuf-bom</artifactId>
+	      <version>3.25.3</version>
+	      <type>pom</type>
+	      <scope>import</scope>
+	    </dependency>
+	    <dependency>
+	      <groupId>io.grpc</groupId>
+	      <artifactId>grpc-bom</artifactId>
+	      <version>1.65.1</version>
+	      <type>pom</type>
+	      <scope>import</scope>
+	    </dependency>
+	  </dependencies>
+</dependencyManagement>
+	
 	<build>
-		<plugins>
+		<plugins>	
+			<plugin>
+			      <groupId>org.xolstice.maven.plugins</groupId>
+			      <artifactId>protobuf-maven-plugin</artifactId>
+			      <version>0.6.1</version>
+			      <configuration>
+			        <protocArtifact>com.google.protobuf:protoc:3.24.4:exe:${os.detected.classifier}</protocArtifact>
+			        <pluginId>grpc-java</pluginId>
+			        <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.59.0:exe:${os.detected.classifier}</pluginArtifact>
+			      </configuration>
+			      <executions>
+			        <execution>
+			          <goals>
+			            <goal>compile</goal>
+			            <goal>compile-custom</goal>
+			          </goals>
+			        </execution>
+			      </executions>
+			    </plugin>
+			
+			    <!-- Plugin para detectar sistema operativo -->
+			    <plugin>
+			      <groupId>kr.motd.maven</groupId>
+			      <artifactId>os-maven-plugin</artifactId>
+			      <version>1.6.2</version>
+			      <executions>
+			        <execution>
+			          <goals>
+			            <goal>detect</goal>
+			          </goals>
+			        </execution>
+			      </executions>
+			    </plugin>
+			
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -177,6 +283,10 @@
 	</build>
 	
 	<repositories>
+		<repository>
+	        <id>central</id>
+	        <url>https://repo.maven.apache.org/maven2</url>
+	    </repository> 
 		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
